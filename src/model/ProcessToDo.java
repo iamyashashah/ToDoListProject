@@ -17,12 +17,12 @@ import model.Todouser;
 
 public class ProcessToDo {
 
-    public static List<Todo> getListById(long _userid) {
+    public static List<Todo> getListById(long userid) {
         //
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "Select t from Todo t where t.todouser.userid = :userid";
         TypedQuery<Todo> q = em.createQuery(qString, model.Todo.class);
-        q.setParameter("userid", _userid);
+        q.setParameter("userid", userid);
 
         List<Todo> todolist = null;
 
@@ -77,22 +77,22 @@ public class ProcessToDo {
 
         }
 
-    public static Todo getToDo(long _todoid) {
+    public static Todo getToDo(long todoid) {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "Select t from Todo t where t.todoid = :todoid";
         Todo td = new Todo();
 
         Query q = em.createQuery(qString, model.Todo.class);
-        q.setParameter("todoid", _todoid);
+        q.setParameter("todoid", todoid);
         long userId = 0;
 
         try {
             //        trans.begin();
-            System.out.println("username = " + _todoid);
+            System.out.println("username = " + todoid);
             td =  (Todo) q.getSingleResult();
 
-            System.out.println("todoid = " + _todoid );
+            System.out.println("todoid = " + todoid );
             //            trans.commit();
 
         } catch (Exception e) {
@@ -110,8 +110,8 @@ public class ProcessToDo {
 
    
 
-        public static void insertTodo(long _userid, String _type, String _desc, long _statusid,
-                Date duedate, long _priority) {
+        public static void insertTodo(long userid, String type, String desc, long statusid,
+                Date duedate, long priority) {
             //
             Date today = new Date();
             System.out.println("today " + today);
@@ -123,15 +123,15 @@ public class ProcessToDo {
             Todostatus tds = new Todostatus();
             Todouser tdu = new Todouser();
                
-            tdu.setUserid(_userid);
+            tdu.setUserid(userid);
            
-            tds.setStatusid(_statusid);
+            tds.setStatusid(statusid);
                        
             td.setTodoid(maxid);           
-            td.setTodotype(_type);
-            td.setPriority(_priority);
+            td.setTodotype(type);
+            td.setPriority(priority);
             td.setDuedate(duedate);
-            td.setTododesc(_desc);
+            td.setTododesc(desc);
             td.setStatusdate(today);
            
             td.setTodostatus(tds);
@@ -189,22 +189,22 @@ public class ProcessToDo {
 
        
 
-        public static long getUserByName(String _username) {
+        public static long getUserByName(String username) {
 
             EntityManager em = DBUtil.getEmFactory().createEntityManager();
             String qString = "Select u.userid from Todouser u where u.username = :username";
 
 
             Query q = em.createQuery(qString, model.Todouser.class);
-            q.setParameter("username", _username);
+            q.setParameter("username", username);
             long userId = 0;
 
             try {
                 //        trans.begin();
-                System.out.println("username = " + _username);
+                System.out.println("username = " + username);
                 userId = (long) q.getSingleResult();
 
-                System.out.println("username = " + _username + " userid = " + userId);
+                System.out.println("username = " + username + " userid = " + userId);
                 //            trans.commit();
 
             } catch (Exception e) {

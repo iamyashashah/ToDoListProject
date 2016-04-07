@@ -63,6 +63,9 @@ public class ToDoServlet extends HttpServlet {
             if (userid == 0) {
 
                 System.out.println("userid for " + username + " not found");
+                String error = ("userid for " + username + " not found");
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("/error.jsp").forward(request, response);
             } else {
 
                 List<Todo> todos = null;

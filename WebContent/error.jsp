@@ -14,20 +14,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<p>
+${error}
+</p>
 
-<h2>ToDoList Project</h2>
-    <form action="ToDoServlet" method="post">
-        <p>
-            <label for="username">username:</label>
-                <input id="username" name="username" value="${param.username}"><br>
-                <label for="username">password:</label>
-                <input id="password" name="password" value="${param.password}">
-                <input type="hidden" name="click" value="1">
-               <br>
-                <input type="submit">
-        </p>
-    </form>
-
-
+<td>
+    <a href="index.jsp"> back to login </a>
+    </td>
 </body>
 </html>
